@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="node_modules/firebase/firebase-app.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="node_modules/firebase/firebase-auth.js"></script>
+    <script src="node_modules/firebase/firebase-database.js"></script>
+
+    <pre id="clientes"></pre>
+    <pre id="lista"></pre>
+
+    <div class="container">
+        <input type="email" id="txtEmail" placeholder="Email">
+        <input type="password" id="txtPassword" placeholder="Contraseña">
+        <button id="btnLogin" class="btn btn-action">Login</button>
+        <button id="btnSignUp" class="btn btn-secondary">Registrar</button>
+        <button id="btnLogout" class="btn btn-action hide">Logout</button>
+    </div>
+
+    <pregress value="0" max="100" id="uploader">0%</pregress>
+    <input type="file" value="upload" id="fileButton" />
+
+     <!-- Initialize Firebase -->
+  <script src="./init-firebase.js"></script>
+</body>
+</html>
