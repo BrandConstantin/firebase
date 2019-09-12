@@ -1,0 +1,6 @@
+1 npm init
+2 npm install --save firebase
+3 npm install -g firebase tools
+4 firebase login (no hace falta)
+5 firebase init
+6 firebaes serve
