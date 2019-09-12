@@ -1,16 +1,16 @@
-$(function ($) {
+$(function($) {
 
     /** Create Operations ======================
      *
      */
     var submitBtn = $('#add-student-btn'),
         sgtTableElement = $('#student-table'),
-        firebaseRef = new Firebase("https://lfchallenge.firebaseio.com/students");
+        firebaseRef = new Firebase("https://");
 
     /** Click handler to submit student information
      * Take values of the student-add-form
      */
-    submitBtn.click(function () {
+    submitBtn.click(function() {
         var studentName = $('#s-name-input').val(),
             studentCourse = $('#s-course-input').val(),
             studentGrade = $('#s-grade-input').val();
@@ -30,29 +30,29 @@ $(function ($) {
      * Attach an asynchronous callback to read the data at our users firebaseReference on load
      * child_added will update the DOM everytime a new student is added to the data base
      */
-    firebaseRef.on("child_added", function (studentSnapShot) {
+    firebaseRef.on("child_added", function(studentSnapShot) {
         updateDOM(studentSnapShot);
-    }, function (errorObject) {
+    }, function(errorObject) {
         console.log("The read failed: " + errorObject.code);
     });
 
-    firebaseRef.on("child_changed", function (studentSnapShot) {
+    firebaseRef.on("child_changed", function(studentSnapShot) {
         updateDOM(studentSnapShot);
-    }, function (errorObject) {
+    }, function(errorObject) {
         console.log("The read failed: " + errorObject.code);
     });
 
-       /** Update Operations ======================
+    /** Update Operations ======================
      * Click handler to update student data and send to firebase
      * Get the unique id of any student
      */
 
     /** Edit button handler */
-    sgtTableElement.on('click', '.edit-btn', function () {
+    sgtTableElement.on('click', '.edit-btn', function() {
         var student_id = $(this).data('id');
         var studentFirebaseRef = firebaseRef.child(student_id);
 
-        studentFirebaseRef.once('value', function (snapshot) {
+        studentFirebaseRef.once('value', function(snapshot) {
             $('#modal-edit-name').val(snapshot.val().name);
             $('#modal-edit-course').val(snapshot.val().course);
             $('#modal-edit-grade').val(snapshot.val().grade);
@@ -81,7 +81,7 @@ $(function ($) {
     }
 
     /** Click handler for modal confirm button */
-    $("#edit-modal").on('click', '#confirm-edit', function () {
+    $("#edit-modal").on('click', '#confirm-edit', function() {
         console.log("im here");
         console.log("('#edit-modal').find('#student-id').val() :", $('#edit-modal').find('#student-id').val());
         var studentFirebaseRef = firebaseRef.child($('#edit-modal').find('#student-id').val());
@@ -90,16 +90,16 @@ $(function ($) {
 
         $("#edit-modal").modal('hide');
     })
-    
-     /** DELETE OPERATIONS ==================================
+
+    /** DELETE OPERATIONS ==================================
      *
      */
 
     /** Delete button handler */
-    sgtTableElement.on('click', '.delete-btn', function () {
+    sgtTableElement.on('click', '.delete-btn', function() {
         var studentFirebaseRef = firebaseRef.child($(this).data('id'));
         console.log('this on delete-btn is: ' + $(this).data('id'));
-        firebaseRef.on('child_removed', function (snapshot) {
+        firebaseRef.on('child_removed', function(snapshot) {
             /** Remove the element from the DOM */
             console.log('snapshot.key is: ', snapshot.key());
             var rowId = snapshot.key();
@@ -140,7 +140,7 @@ $(function ($) {
                     text: studentObject.grade,
                     class: "student-grade"
                 }),
-            /* Each student gets a unique edit and delete button appended to its row */
+                /* Each student gets a unique edit and delete button appended to its row */
                 sEditBtn = $('<button>', {
                     class: "btn btn-info edit-btn",
                     'data-id': studentObjectId
@@ -166,6 +166,3 @@ $(function ($) {
         }
     }
 });
-
-
-
